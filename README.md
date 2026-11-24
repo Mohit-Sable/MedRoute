@@ -1,194 +1,429 @@
-# MedRoute AI — Autonomous Biomedical Waste Command & Segregation Platform
+# MedRoute AI
+### Autonomous Biomedical Waste Command & Segregation Platform
 
-[![React](https://img.shields.io/badge/React-19.2.8-61DAFB?logo=react&logoColor=white)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8.3.0-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Field%20Project%20Prototype-blue.svg)]()
-[![Deployment](https://img.shields.io/badge/Deploy-Render%20Ready-46E3B7?logo=render&logoColor=white)](render.yaml)
+<p align="center">
+  An intelligent hospital waste management platform integrating Edge AI, Autonomous Mobile Robotics, and digital waste traceability to improve biomedical waste collection, segregation, and operational safety.
+</p>
 
-> **Field Project Overview**: MedRoute AI is a software prototype and mission-control platform designed for hospitals to supervise AI-powered, battery-electric Autonomous Mobile Robots (AMRs) tasked with biomedical waste collection, computer-vision identification, automated multi-compartment segregation, and end-to-end regulatory traceability.
-
----
-
-## 📌 Problem Statement & Context
-
-Modern hospital facilities produce tonnes of hazardous biomedical waste daily across Emergency Departments, Intensive Care Units, Operating Theatres, and Pathology Laboratories. Traditional collection methods suffer from:
-1. **Biohazard Exposure**: Manual waste handling risks needle-stick injuries, pathogen transmission, and chemical contamination.
-2. **Segregation Errors**: Improperly sorted waste (e.g., sharps mixed with general or infectious waste) violates health standards, contaminates recyclable materials, and exponentially increases incineration costs.
-3. **Audit & Traceability Gaps**: Manual paper logs lack real-time chain-of-custody verification, resulting in regulatory compliance penalties.
-
-**MedRoute AI** solves this by uniting **Edge Computer Vision**, **Autonomous Mobile Robotics (AMR)**, and a **Digital Waste Passport** ledger into an operational command center.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/AI-Computer%20Vision-8A2BE2?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Deployment-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black" />
+</p>
 
 ---
 
-## 🚀 Key Features
+## Overview
 
-### 1. 🏥 Command & Control Dashboard
-- Real-time KPI telemetry: Daily waste collected (kg), segregation compliance score (%), active rovers, and pending biohazard collection orders.
-- Dynamic fleet status monitor displaying robot battery levels, navigation states (`Idle`, `En Route`, `Collecting`, `Returning`), and active payload weights.
-- Real-time audit log recording every automated navigation, scan, and transfer event.
+**MedRoute AI** is a hospital-focused biomedical waste management and command-and-control platform designed to demonstrate how intelligent automation can improve healthcare waste collection, segregation, and regulatory traceability.
 
-### 2. 🤖 Autonomous Mobile Robot (AMR) Fleet Supervision
-- Detailed rover kinematics: battery levels, motor currents, Wi-Fi RSSI signal strength, and odometer readings.
-- Sensor diagnostics monitoring 2D LiDAR SLAM, dual stereo depth cameras, ultrasonic proximity arrays, and UV-C sterilization status.
-- Payload monitoring across segregated multi-bin bays with individual lock and status indicators.
-- One-click global and individual emergency stop (`E-Stop`) overrides.
+Hospitals generate different categories of biomedical waste every day. Improper handling and segregation can expose healthcare workers to hazardous materials, increase operational costs, and create compliance challenges.
 
-### 3. 🗺️ Live Costmap & Hospital Floor Tracking
-- Interactive SVG blueprint with dynamic floor switching (**Basement Vault**, **Floor 1 ED/Pharma**, **Floor 2 ICU/Wards**, **Floor 3 Pathology**).
-- SLAM trajectory waypoints, active AMR path vectors, and costmap obstacle-avoidance detours.
-- Floor-aware room highlighting for departmental status tracking.
+MedRoute AI addresses these challenges through a centralized digital platform that simulates the supervision of Autonomous Mobile Robots (AMRs), AI-powered waste classification, multi-compartment waste collection, and digital chain-of-custody tracking.
 
-### 4. 🔬 Edge AI Waste Classification Scanner
-- Optical and depth viewfinder simulating camera feed from AMR rover arm.
-- Neural classification inferring waste item category (`Infectious`, `Sharps`, `Anatomical`, `Cytotoxic`, `General`).
-- Real-time confidence score metrics with safety fallback warnings for low-confidence detections (<80%).
-- Automated bin recommendation (`Yellow`, `Red`, `White Translucent`, `Blue/Cardboard`).
-- Support for preset test bio-waste samples and custom image file uploads (with type and 10MB size validation).
+The platform provides hospital administrators with a unified operational dashboard to monitor waste generation, robot fleets, collection tasks, segregation compliance, and waste movement across hospital departments.
 
-### 5. 🗂️ Biomedical Waste Registry & Filtering
-- Searchable database of waste batches with categorization, originating ward, timestamp, weight, and status.
-- Real-time search by Waste ID, department, or item name with category pills.
-- CSV export for environmental compliance reporting.
+## Problem Statement
 
-### 6. 📋 Dynamic Task Dispatch & Queue
-- Assign high-priority collection tasks by department, floor, and urgency.
-- Automated robot dispatch: updating task assignments dynamically transitions rovers from `Idle` to `En Route`.
-- Automatic robot release upon collection completion.
+Traditional biomedical waste management systems face several operational challenges:
 
-### 7. 📊 Multi-Stream Operational Analytics
-- Waste generation trends by stream and department.
-- AMR utilization and task completion rates.
-- Compartment fill levels against customizable overfill warning thresholds.
-- Instant CSV operational report generation.
+- **Biohazard Exposure:** Manual waste collection increases the risk of needle-stick injuries and exposure to infectious materials.
+- **Segregation Errors:** Incorrect waste categorization can contaminate recyclable materials and create regulatory compliance issues.
+- **Inefficient Collection:** Fixed collection schedules may result in unnecessary trips or delayed waste removal.
+- **Limited Visibility:** Hospitals often lack centralized visibility into waste collection and segregation operations.
+- **Traceability Gaps:** Paper-based records make it difficult to maintain reliable waste movement and disposal histories.
 
-### 8. 🛡️ Digital Waste Passport & Chain of Custody
-- Unique regulatory Waste ID (`MW-2026-XXXXXX`) with cryptographic verification hash (`SHA-256`).
-- Step-by-step custody timeline tracking: Generation $\rightarrow$ AI Identification $\rightarrow$ AMR Assignment $\rightarrow$ Collection $\rightarrow$ Vault Transfer $\rightarrow$ Final Disposal.
-- Digital scannable QR verification code.
+## Our Solution
 
-### 9. ⚠️ Safety, Alerting & Operational Settings
-- Real-time alerts categorized by severity (`Critical`, `Warning`, `Info`).
-- Interactive alert simulation trigger with Web Audio feedback effects.
-- Configurable hospital identity, AMR clock acceleration (1x, 2x, 5x), and compartment overfill thresholds.
+MedRoute AI introduces an intelligent waste management control center that combines:
 
----
+1. AI-assisted biomedical waste classification.
+2. Autonomous Mobile Robot fleet supervision.
+3. Hospital floor mapping and route visualization.
+4. Dynamic waste collection task dispatch.
+5. Multi-compartment waste segregation monitoring.
+6. Digital Waste Passport generation.
+7. End-to-end chain-of-custody tracking.
+8. Operational analytics and compliance reporting.
 
-## 🛠️ Technology Stack
+## Key Features
 
-- **Frontend Framework**: [React 19](https://react.dev/)
-- **Build Tooling & Bundler**: [Vite 8](https://vitejs.dev/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Styling**: Modular, high-performance Vanilla CSS with design tokens, sleek dark hospital theme, and glassmorphic panels
-- **Audio Feedback**: Native Web Audio API synthesis
-- **State Management**: React Context API (`AppContext.jsx`) with deterministic real-time telemetry simulation
-- **Deployment Target**: [Render Static Site](https://render.com/)
+### 1. Command & Control Dashboard
 
----
+A centralized operational dashboard providing hospital administrators with an overview of waste management activities.
 
-## 📁 Repository Structure
+- Daily biomedical waste collection metrics.
+- Segregation compliance score.
+- Active and available robot count.
+- Pending waste collection orders.
+- Fleet status monitoring.
+- Real-time operational audit logs.
+
+### 2. Autonomous Mobile Robot (AMR) Fleet Management
+
+Monitor and supervise the hospital's autonomous waste collection fleet.
+
+- Individual robot status monitoring.
+- Battery percentage and payload weight.
+- Navigation states: Idle, En Route, Collecting, and Returning.
+- Motor current and Wi-Fi signal diagnostics.
+- Simulated LiDAR SLAM and stereo camera sensor monitoring.
+- Multi-compartment payload status.
+- Individual and global Emergency Stop controls.
+
+### 3. Live Hospital Floor Tracking
+
+Interactive hospital floor visualization for monitoring robot movement and collection activities.
+
+- Interactive SVG-based hospital floor plans.
+- Multi-floor navigation.
+- Active robot path visualization.
+- SLAM trajectory waypoints.
+- Obstacle avoidance detour simulation.
+- Department and room status highlighting.
+
+### 4. AI-Powered Biomedical Waste Classification
+
+A computer-vision-inspired classification interface designed to identify biomedical waste categories.
+
+Supported waste categories:
+
+| Waste Category | Suggested Bin |
+|---|---|
+| Infectious | Yellow |
+| Sharps | White Translucent |
+| Anatomical | Yellow |
+| Cytotoxic | Yellow |
+| General | General waste stream |
+| Contaminated recyclable plastic | Red |
+| Glassware | Blue |
+
+Additional capabilities:
+
+- Image-based waste classification interface.
+- Preset biomedical waste samples.
+- Custom image upload.
+- Confidence score visualization.
+- Low-confidence warnings below 80%.
+- Automated waste segregation recommendations.
+
+### 5. Biomedical Waste Registry
+
+A searchable registry for monitoring biomedical waste batches.
+
+- Unique Waste ID.
+- Waste category and classification.
+- Originating hospital department.
+- Collection timestamp.
+- Waste weight.
+- Current processing status.
+- Category-based filtering.
+- CSV export for operational reporting.
+
+### 6. Dynamic Task Dispatch
+
+An intelligent task management interface for coordinating waste collection activities.
+
+- Create collection tasks.
+- Assign priority levels.
+- Select hospital departments and floors.
+- Dispatch available robots.
+- Monitor task execution.
+- Update fleet status dynamically.
+- Release robots after task completion.
+
+### 7. Operational Analytics
+
+Visualize waste management performance through multiple analytical views.
+
+- Waste generation trends.
+- Waste distribution by category.
+- Department-wise waste generation.
+- AMR utilization metrics.
+- Collection task completion rates.
+- Compartment fill-level monitoring.
+- Configurable overfill warning thresholds.
+- CSV operational report generation.
+
+### 8. Digital Waste Passport
+
+A digital identity and traceability mechanism for every biomedical waste batch.
+
+Each waste batch receives:
+
+- Unique Waste ID (`MW-2026-XXXXXX`).
+- SHA-256 verification hash.
+- QR-based verification code.
+- Waste category and origin.
+- Collection and transfer information.
+- Chronological custody history.
+
+**Chain-of-custody workflow:**
 
 ```text
-Field Project/
-├── dist/                     # Optimized production bundle
-├── public/                   # Static assets & web manifest
-├── src/
-│   ├── assets/               # Local styles and static assets
-│   ├── components/
-│   │   ├── layout/           # Header, Sidebar, and App Shell
-│   │   └── views/            # Dashboard, Fleet, Tracking, AI Scanner, Registry, Tasks, etc.
-│   ├── context/
-│   │   └── AppContext.jsx    # Central state store & deterministic AMR simulation engine
-│   ├── data/
-│   │   └── mockData.js       # Initial state, route waypoints, demo AI samples, and analytics
-│   ├── App.jsx               # Root application router & modal coordinator
-│   ├── index.css             # Design tokens, typography, badges, cards, responsive layout
-│   └── main.jsx              # React 19 bootstrap entry
-├── .env.example              # Environment variable specification
-├── render.yaml               # Infrastructure-as-Code for Render Static Site deployment
-├── index.html                # HTML5 entry with metadata
-├── package.json              # Project scripts and dependencies
-└── README.md                 # Project documentation
+Waste Generation
+       |
+       v
+AI Identification
+       |
+       v
+AMR Assignment
+       |
+       v
+Waste Collection
+       |
+       v
+Vault Transfer
+       |
+       v
+Final Disposal
+       |
+       v
+Digital Audit Record
 ```
 
----
+### 9. Safety, Alerts & Operational Settings
 
-## 💻 Local Development Setup
+- Critical, Warning, and Information alerts.
+- Interactive alert simulation.
+- Audio feedback using Web Audio API.
+- Configurable compartment overfill thresholds.
+- Hospital identity settings.
+- AMR simulation speed controls.
+- Emergency Stop overrides.
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| React 19 | Frontend application |
+| Vite 8 | Development server and build tooling |
+| JavaScript ES6+ | Application logic |
+| Vanilla CSS | Styling and responsive UI |
+| Lucide React | Icons |
+| React Context API | Global state management |
+| Web Audio API | Audio alert feedback |
+| SVG | Interactive hospital floor visualization |
+| Render | Static site deployment |
+
+## System Architecture
+
+```text
+              HOSPITAL ADMINISTRATOR
+                       |
+                       v
+              REACT APPLICATION
+                    (Vite)
+                       |
+          +------------+------------+
+          |            |            |
+          v            v            v
+       Dashboard    AMR Fleet    AI Scanner
+          |            |            |
+          v            v            v
+       Analytics   Floor Tracking  Classification
+          |            |            |
+          +------------+------------+
+                       |
+                       v
+               REACT CONTEXT API
+                       |
+                       v
+               CENTRAL STATE STORE
+                       |
+          +------------+------------+
+          |            |            |
+          v            v            v
+       Fleet Data   Waste Data   Task Data
+          |            |            |
+          +------------+------------+
+                       |
+                       v
+              SIMULATION ENGINE
+                       |
+                       v
+             LIVE UI TELEMETRY
+```
+
+## Project Structure
+
+```text
+MedRoute/
+│
+├── public/
+│   └── Static assets and web manifest
+│
+├── src/
+│   ├── assets/
+│   │
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Header
+│   │   │   ├── Sidebar
+│   │   │   └── App Shell
+│   │   │
+│   │   └── views/
+│   │       ├── Dashboard
+│   │       ├── Fleet
+│   │       ├── Tracking
+│   │       ├── AI Scanner
+│   │       ├── Registry
+│   │       └── Tasks
+│   │
+│   ├── context/
+│   │   └── AppContext.jsx
+│   │
+│   ├── data/
+│   │   └── mockData.js
+│   │
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+│
+├── .env.example
+├── .gitignore
+├── index.html
+├── package.json
+├── render.yaml
+├── vite.config.js
+└── README.md
+```
+
+## Getting Started
 
 ### Prerequisites
-- **Node.js**: v18.0.0 or higher
-- **Package Manager**: `npm` (v9+ recommended)
 
-### 1. Clone the repository
+Make sure you have the following installed:
+
+- Node.js 18 or higher.
+- npm 9 or higher.
+- Git.
+
+### 1. Clone the Repository
+
 ```bash
-git clone <repository-url>
-cd "Field Project"
+git clone https://github.com/Mohit-Sable/MedRoute.git
 ```
 
-### 2. Install dependencies
+### 2. Navigate to the Project Directory
+
+```bash
+cd MedRoute
+```
+
+### 3. Install Dependencies
+
 ```bash
 npm install
 ```
 
-### 3. Configure environment (Optional)
-```bash
-cp .env.example .env
-```
+### 4. Start the Development Server
 
-### 4. Start the development server
 ```bash
 npm run dev
 ```
-Open your browser and navigate to:
+
+Open the following URL in your browser:
+
 ```text
-http://127.0.0.1:5173/
+http://localhost:5173
 ```
 
-### 5. Build for production
+### 5. Build for Production
+
 ```bash
 npm run build
 ```
-The compiled, minified bundle will be output to the `dist/` directory.
 
-### 6. Preview the production build locally
+The optimized production build will be generated inside the `dist/` directory.
+
+### 6. Preview Production Build
+
 ```bash
 npm run preview
 ```
 
+## Deployment
+
+MedRoute AI is configured for deployment as a Render Static Site.
+
+### Deploy using Render Blueprint
+
+1. Open the [Render Dashboard](https://dashboard.render.com/).
+2. Select **New Blueprint Instance**.
+3. Connect your GitHub repository.
+4. Render will detect the `render.yaml` configuration.
+5. Review the deployment settings.
+6. Click Apply to deploy the application.
+
+### Manual Deployment Configuration
+
+| Setting | Value |
+|---|---|
+| Service Type | Static Site |
+| Branch | main |
+| Build Command | `npm install && npm run build` |
+| Publish Directory | `dist` |
+| Rewrite Source | `/*` |
+| Rewrite Destination | `/index.html` |
+
+## Important Prototype Disclaimer
+
+MedRoute AI is currently a software-based field project and operational simulation prototype.
+
+The following capabilities are simulated:
+
+- Autonomous robot navigation and movement.
+- LiDAR SLAM and obstacle avoidance telemetry.
+- Robot battery and sensor readings.
+- Real-time fleet operations.
+- AI-based waste classification and confidence scores.
+- Waste collection and transfer workflows.
+
+The computer vision interface demonstrates a classification workflow; it is not currently connected to a validated production AI inference model.
+
+Physical AMR hardware, validated computer vision models, hospital infrastructure integrations, and regulatory verification systems would be required for real-world deployment.
+
+**MedRoute AI should not be used as a substitute for certified biomedical waste handling procedures or safety systems.**
+
+## Future Enhancements
+
+- Integration with physical Autonomous Mobile Robots.
+- Real-time LiDAR and depth camera integration.
+- Deployment of validated YOLO-based waste classification models.
+- ROS 2 integration for autonomous navigation.
+- IoT-enabled waste bin monitoring.
+- Cloud-based fleet monitoring.
+- Hospital ERP and waste management system integration.
+- Blockchain-backed waste traceability.
+- Predictive waste collection scheduling.
+- Advanced compliance and environmental impact analytics.
+
+## Project Objectives
+
+MedRoute AI aims to demonstrate how emerging technologies can improve biomedical waste management through:
+
+- Reduced human exposure to hazardous waste.
+- Improved segregation accuracy.
+- Optimized collection workflows.
+- Better hospital operational visibility.
+- Digital waste traceability.
+- Data-driven waste management decisions.
+
+## Author
+
+**Mohit Sable**
+
+GitHub: [@Mohit-Sable](https://github.com/Mohit-Sable)
+
+Project Repository: [MedRoute AI](https://github.com/Mohit-Sable/MedRoute)
+
 ---
 
-## ☁️ Deployment on Render
-
-This project is configured to deploy as a **Render Static Site**.
-
-### Option A: Automatic Deploy with `render.yaml` Blueprint
-1. In [Render Dashboard](https://dashboard.render.com/), navigate to **Blueprints** $\rightarrow$ **New Blueprint Instance**.
-2. Connect your Git repository.
-3. Render reads `render.yaml` automatically, sets up the static service, installs dependencies, runs `npm run build`, and configures the single-page application rewrite rule (`/*` $\rightarrow$ `/index.html`).
-4. Click **Apply**.
-
-### Option B: Manual Static Site Setup
-1. In Render, select **New +** $\rightarrow$ **Static Site**.
-2. Connect your Git repository.
-3. Configure:
-   - **Name**: `medroute-ai`
-   - **Branch**: `main`
-   - **Build Command**: `npm install && npm run build`
-   - **Publish Directory**: `dist`
-4. Under **Redirects/Rewrites**, add:
-   - **Type**: `Rewrite`
-   - **Source**: `/*`
-   - **Destination**: `/index.html`
-5. Click **Create Static Site**.
-
----
-
-## 🔒 Important Prototype Disclaimers
-
-1. **Simulated Robotics & Telemetry**: MedRoute AI is a software control-room demonstration. All robot coordinate kinematics, waypoint traversal, and sensor readings are generated via deterministic state simulation.
-2. **Demonstration AI Model**: The computer-vision classification simulates a MobileNet-V3 / YOLOv8 TensorRT edge model pipeline. It is not intended for real clinical diagnostic use without connection to a validated medical model service.
-
----
-
-## 📄 License
-This project was developed as an academic and technological field demonstration prototype. Distributed under the MIT License.
+<p align="center">
+  <b>Smarter Waste Management. Safer Hospitals. Sustainable Healthcare.</b>
+  <br/><br/>
+  ⭐ If you find this project interesting, consider giving it a star!
+</p>
